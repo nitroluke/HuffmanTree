@@ -10,7 +10,7 @@ package huffmantree;
  *
  * @author nitroluke
  */
-public class Node {
+public class Node implements Comparable<Node>{
     public int frequency;
     public char character;
     public Node left;
@@ -25,6 +25,7 @@ public class Node {
     public Node(Node left, Node right){
         this.left = left;
         this.right = right;
+        frequency = (left.frequency + right.frequency);
     }
     
     public Node GetRight(){
@@ -38,4 +39,10 @@ public class Node {
     public char GetCharacter(){
         return character;
     }
+
+    @Override
+    public int compareTo(Node other) {
+       return (this.frequency - other.frequency); // this might be backwards... fuck with it(switch them)
+        //return(other.frequency - this.frequency);
+    }   
 }

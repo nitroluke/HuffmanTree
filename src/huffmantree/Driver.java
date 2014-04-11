@@ -6,9 +6,13 @@
 
 package huffmantree;
 
+import static huffmantree.HuffmanTree.encoding;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Scanner;
 
@@ -17,12 +21,13 @@ import java.util.Scanner;
  * @author nitroluke
  */
 public class Driver {
-       
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException {
+        
         // TODO code application logic here
+        PrintWriter writer = new PrintWriter("encodedBits.txt","UTF-8");
         int frequency[] = new int[256]; // just in case of unicode
         Scanner in = new Scanner(new FileReader("C://Users/nitroluke/Documents/NetBeansProjects/HuffmanTree/textFile.txt"));
         while(in.hasNext()){
@@ -32,14 +37,29 @@ public class Driver {
                 // string.charAt(i) is the character in the current string
                 //(int)string.charAt(i) is the ASCII Value
                 // alphaberArr[string.charAt(i)] is the frequency of that char.
-                System.out.println("the ASCII value of " + string.charAt(i) + "  = " + (int)string.charAt(i));
+              //  System.out.println("the ASCII value of " + string.charAt(i) + "  = " + (int)string.charAt(i));
                 frequency[string.charAt(i)]++; // increments the freqency of all char's except spaces
-                System.out.println("the frequency of   " + string.charAt(i) + "  = " + frequency[string.charAt(i)]);
+            //    System.out.println("the frequency of   " + string.charAt(i) + "  = " + frequency[string.charAt(i)]);
             }
             frequency[(int)' ']++; // catches frequency of spaces
             System.out.println("the frequency of ' '  = " + frequency[(int)' ']);
 
         }
         HuffmanTree.buildQueue(frequency);
+        
+          for(Map.Entry<Character, String> pair: encoding.entrySet()){
+           System.out.println("(" + pair.getValue()+ "," + pair.getKey() + ")");
+           writer.print(pair.getValue());
+           
+       }
+          writer.close();
+          Scanner in2 = new Scanner(new FileReader("C://Users/nitroluke/Documents/NetBeansProjects/HuffmanTree/encodedBits.txt"));
+          
+          while(in2.hasNext()){
+              String code = in2.next();
+             // System.out.print(code);
+              HuffmanTree.decode(code);
+          }
+          
     }
 }
