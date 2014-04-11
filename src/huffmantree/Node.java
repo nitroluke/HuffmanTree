@@ -42,7 +42,7 @@ public class Node implements Comparable<Node>{
 
     @Override
     public int compareTo(Node other) {
-       return (this.frequency - other.frequency); // this might be backwards... fuck with it(switch them)
-        //return(other.frequency - this.frequency);
+      return (this.frequency - other.frequency); // this might be backwards... fuck with it(switch them)
+      //  return(other.frequency - this.frequency);
     }   
 }

@@ -45,19 +45,32 @@ public class Driver {
             System.out.println("the frequency of ' '  = " + frequency[(int)' ']);
 
         }
-        HuffmanTree.buildQueue(frequency);
+        System.out.println("build Tree ========================");
+        HuffmanTree.buildQueue(frequency);       
+         Scanner in3 = new Scanner(new FileReader("C://Users/nitroluke/Documents/NetBeansProjects/HuffmanTree/textFile.txt"));
+        String string = "";
+        while(in3.hasNext()){
+            string = in3.next();
+            System.out.println(string);
+            }
+            for(int i =0; i < string.length(); i++){
+           // if(encoding.containsKey(string.charAt(i))){
+                //System.out.println("->"+encoding.get(string.charAt(i)));
+               writer.print(encoding.get(string.charAt(i)));
+           // }
+           }
         
-          for(Map.Entry<Character, String> pair: encoding.entrySet()){
+        writer.close();
+          for(Map.Entry<Character, String> pair: encoding.entrySet()){  // this is where i think i am having problems.  I am not writing out the correct code
            System.out.println("(" + pair.getValue()+ "," + pair.getKey() + ")");
-           writer.print(pair.getValue());
+          // writer.print(pair.getValue());
            
        }
-          writer.close();
           Scanner in2 = new Scanner(new FileReader("C://Users/nitroluke/Documents/NetBeansProjects/HuffmanTree/encodedBits.txt"));
           
           while(in2.hasNext()){
               String code = in2.next();
-             // System.out.print(code);
+              System.out.print("code = " + code);
               HuffmanTree.decode(code);
           }
           

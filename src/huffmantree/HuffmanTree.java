@@ -27,14 +27,14 @@ public class HuffmanTree {
 
         Node node;
         for (int i = 0; i < frequency.length; i++) {
-            if (frequency[i] != 0) {
+            if (frequency[i] != 0) { // adds all frequencies to the queue that have values in the frequency array
                 node = new Node(frequency[i], (char) i);
                 System.out.println("Frequency = " + node.GetFrequency() + ", Character = " + node.GetCharacter());
                 queue.add(node);
             }
         }
         superParent = buildTree(queue);  // builds a tree given a queue
-        encode(superParent, "");
+        encode(superParent, ""); //encodes the values to the hashmap given a tree
 
     }
 
@@ -62,12 +62,13 @@ public class HuffmanTree {
     }
 
     static void decode(String code) throws FileNotFoundException, UnsupportedEncodingException {
-        try (PrintWriter writer = new PrintWriter("encodedMessage.txt", "UTF-8")) {
+        try (PrintWriter writer = new PrintWriter("decodedMessage.txt", "UTF-8")) {
             Node cur = superParent;
             //System.out.print(cur.character);
             System.out.println(code);
             for (int i = 0; i < code.length(); i++) {
                 char c = code.charAt(i);
+                System.out.println("charAt(" + i + ") = " + code.charAt(i));
                 
                 /*
                 Cases
@@ -78,6 +79,7 @@ public class HuffmanTree {
                 */
                 if (cur.left == null || cur.right == null) { // we are at a leaf node
                     writer.print(cur.character);
+                    System.out.println("cur.char = " + cur.character);
                     cur = superParent; 
                 } else {
                     if (c == '0') {
